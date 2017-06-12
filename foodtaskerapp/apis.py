@@ -52,11 +52,11 @@ def customer_add_order(request):
 
         # Check whether customer has any order that is not delivered
         if Order.objects.filter(customer = customer).exclude(status = Order.DELIVERED):
-            return JsonResponse({"status": "fail", "error": "Your last order must be completed"})
+            return JsonResponse({"status": "failed", "error": "Your last order must be completed"})
 
         # Check Address
         if not request.POST["address"]:
-            return JsonResponse({"status": "fail", "error": "Address is required"})
+            return JsonResponse({"status": "failed", "error": "Address is required"})
 
         # Get Order Details
         order_details = json.loads(request.POST["order_details"])
